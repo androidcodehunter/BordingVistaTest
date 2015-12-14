@@ -9,6 +9,12 @@ import android.view.MenuItem;
 
 import sharif.bordingvistatestapp.R;
 
+
+/**
+ * Created by androidcodehunter on 12/14/2015.
+ * Email: sharif.iit.du@gmail.com
+ */
+
 public class DatabaseActivity extends AppCompatActivity {
 
 

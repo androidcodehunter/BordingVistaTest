@@ -1,5 +1,7 @@
 package sharif.bordingvistatestapp.database.table;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,8 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Acer on 12/14/2015.
+ * Created by androidcodehunter on 12/14/2015.
+ * Email: sharif.iit.du@gmail.com
  */
+
 public class Department {
 
     public static final String DEPT_NO = "DeptNo";
@@ -17,58 +21,62 @@ public class Department {
     public static final String DEPT_COUNT = "Count";
 
 
-    private String mDepartmentNo;
+    private int mDepartmentNo;
     private String mDepartmentText;
-    private String mDepartmentCount;
+    private int mDepartmentCount;
 
 
-    public String getDepartmentNo() {
+    public void setDepartmentNo(int departmentNo) {
+        this.mDepartmentNo = departmentNo;
+    }
+
+    public void setDepartmentCount(int departmentCount) {
+        this.mDepartmentCount = departmentCount;
+    }
+
+
+    public int getDepartmentNo() {
         return mDepartmentNo;
+    }
+
+    public int getDeptCount() {
+        return mDepartmentCount;
     }
 
     public String getDepartmentText() {
         return mDepartmentText;
     }
 
-    public String getDepartmentCount() {
-        return mDepartmentCount;
-    }
-
-    public void setDepartmentNo(String departmentNo) {
-        this.mDepartmentNo = departmentNo;
-    }
 
     public void setDepartmentText(String departmentText) {
         this.mDepartmentText = departmentText;
     }
 
-    public void setDepartmentCount(String departmentCount) {
-        this.mDepartmentCount = departmentCount;
-    }
-
 
     /**
-     * Get all department datas from json response.
+     * Get all department data's from json response.
      *
      * @param result The server response which is used to parse.
      * */
-    public static List<Department> getDepartmentsInfoFromJson(JSONArray result) {
+    public static List<Department> getDepartmentsInfoFromJson(JSONObject result) throws JSONException {
+
+        final String TAG_ARTICLE_INQ = "ArticleInq";
+        final String TAG_DEPARTMENTS = "Departments";
+        final String TAG_DEPT_ARRAY = "Dept";
+
         List<Department> departments = new ArrayList<>();
 
-        for (int i = 0; i < result.length(); i++) {
-            try {
+        final JSONObject jsonObjectDepartments = result.getJSONObject(TAG_ARTICLE_INQ).getJSONObject(TAG_DEPARTMENTS);
 
-                JSONObject jsonObject = (JSONObject) result.get(i);
-                Department department = new Department();
-                department.setDepartmentNo((String) jsonObject.get(DEPT_NO));
-                department.setDepartmentText((String) jsonObject.get(DEPT_TEXT));
-                department.setDepartmentCount((String) jsonObject.get(DEPT_COUNT));
-                departments.add(department);
+        final JSONArray jsonArrayDept = jsonObjectDepartments.getJSONArray(TAG_DEPT_ARRAY);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
+        for (int i = 0; i < jsonArrayDept.length(); i++){
+            JSONObject jsonObjectDept = (JSONObject) jsonArrayDept.get(i);
+            Department department = new Department();
+            department.setDepartmentNo(jsonObjectDept.getInt(DEPT_NO));
+            department.setDepartmentText(jsonObjectDept.getString(DEPT_TEXT));
+            department.setDepartmentCount(jsonObjectDept.getInt(DEPT_COUNT));
+            departments.add(department);
         }
 
         return departments;

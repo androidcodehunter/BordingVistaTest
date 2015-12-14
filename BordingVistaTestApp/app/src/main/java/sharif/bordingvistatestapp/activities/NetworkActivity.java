@@ -3,6 +3,9 @@ package sharif.bordingvistatestapp.activities;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -18,17 +21,36 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Collections;
+import java.util.List;
+
 import sharif.bordingvistatestapp.R;
+import sharif.bordingvistatestapp.adapters.DepartmentListAdapter;
 import sharif.bordingvistatestapp.database.table.Department;
 import sharif.bordingvistatestapp.utils.Constants;
 import sharif.bordingvistatestapp.utils.HttpHelper;
 import sharif.bordingvistatestapp.utils.Utils;
+import sharif.bordingvistatestapp.view.SimpleItemDecoration;
+
+/**
+ * Created by androidcodehunter on 12/14/2015.
+ * Email: sharif.iit.du@gmail.com
+ */
 
 public class NetworkActivity extends AppCompatActivity {
 
     private HttpHelper mHttpHelper;
+
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLayoutManager;
+    private DepartmentListAdapter mDepartmentListAdapter;
+
+    private List<Department> mDepartmentList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +62,34 @@ public class NetworkActivity extends AppCompatActivity {
         mHttpHelper = HttpHelper.getInstance(this);
 
         setupGetNetworkDataButton();
+
+        initDepartmentAdapter();
     }
+
+    /**
+     * Initialize the adapter for department.
+     *
+     * */
+    private void initDepartmentAdapter() {
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+        mDepartmentList = Collections.EMPTY_LIST;
+
+        mRecyclerView.setHasFixedSize(true);
+        RecyclerView.ItemDecoration itemDecoration =
+                new SimpleItemDecoration(getResources().getDrawable(android.R.drawable.divider_horizontal_bright));
+        mRecyclerView.addItemDecoration(itemDecoration);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mDepartmentListAdapter = new DepartmentListAdapter();
+        mRecyclerView.setAdapter(mDepartmentListAdapter);
+    }
+
+
 
 
     /**
@@ -66,63 +115,58 @@ public class NetworkActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                if (!Utils.isNetworkAvailable(getBaseContext())){
-                    Toast.makeText(getBaseContext(), getString(R.string.no_internet_connection_text),Toast.LENGTH_SHORT).show();
+                if (!Utils.isNetworkAvailable(getBaseContext())) {
+                    Toast.makeText(getBaseContext(), getString(R.string.no_internet_connection_text), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                Log.e("TAG", "Button is clicked");
-
-              //  mHttpHelper.pullDataFromServer(Constants.STORE_URL);
-
-
-                JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                        (Request.Method.GET, Constants.STORE_URL, null, new Response.Listener<JSONObject>() {
-
-                            @Override
-                            public void onResponse(JSONObject response) {
-                               // mTxtDisplay.setText("Response: " + response.toString());
-                                Log.e("Server response ", ""+ response.toString());
-                            }
-                        }, new Response.ErrorListener() {
-
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // TODO Auto-generated method stub
-                                Log.e("Server response ", "error");
-                            }
-                        });
-
-
-
-                mHttpHelper.addToRequestQueue(jsObjRequest);
-
-
-
-                JsonArrayRequest topicRequest;
-                topicRequest = new JsonArrayRequest(Constants.STORE_URL,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                Log.e("insertion successful", " successful");
-
-                            }
-                        }, new Response.ErrorListener() {
-
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("insertion", " error");
-                    }
-                }
-                );
-                mHttpHelper.addToRequestQueue(topicRequest);
-
+                runJsonDataParser();
 
             }
         });
     }
 
+
+
+    /**
+     * Run the parser process to parsee the data which is comming from server.
+     * */
+    public void runJsonDataParser(){
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, Constants.STORE_URL, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            mDepartmentList.clear();
+                            mDepartmentList = Department.getDepartmentsInfoFromJson(response);
+                            refreshDepartmentList();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Server response ", "error");
+                    }
+                });
+
+        mHttpHelper.addToRequestQueue(jsObjRequest);
+
+    }
+
+    /**
+     * Refresh department list item.
+     *
+     *
+     */
+    public void refreshDepartmentList() {
+        mDepartmentListAdapter.setDepartments(mDepartmentList);
+    }
 
 
 
@@ -144,8 +188,5 @@ public class NetworkActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
 }

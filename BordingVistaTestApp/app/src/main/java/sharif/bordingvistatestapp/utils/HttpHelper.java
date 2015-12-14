@@ -17,8 +17,10 @@ import org.json.JSONObject;
 import sharif.bordingvistatestapp.database.table.Department;
 
 /**
- * Created by Acer on 12/14/2015.
+ * Created by androidcodehunter on 12/14/2015.
+ * Email: sharif.iit.du@gmail.com
  */
+
 public class HttpHelper {
 
     private RequestQueue mRequestQueue;
@@ -51,34 +53,4 @@ public class HttpHelper {
         getRequestQueue().add(req);
     }
 
-
-    /**
-     *
-     * Pull all department data's from specific server url.
-     *
-     * @param url The url which is used to get server data.
-     * */
-    public void pullDataFromServer(String url) {
-        JsonArrayRequest topicRequest;
-        topicRequest = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.e("insertion successful", " successful");
-
-                        Log.e("Server response ", ""+ response.toString());
-
-                        Department.getDepartmentsInfoFromJson(response);
-                    }
-                }, new Response.ErrorListener() {
-
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }
-        );
-        addToRequestQueue(topicRequest);
-    }
 }

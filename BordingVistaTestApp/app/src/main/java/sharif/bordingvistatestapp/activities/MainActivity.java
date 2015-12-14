@@ -9,9 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import sharif.bordingvistatestapp.R;
+/**
+ * Created by androidcodehunter on 12/14/2015.
+ * Email: sharif.iit.du@gmail.com
+ */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

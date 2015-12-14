@@ -1,7 +1,5 @@
 <resources>
 
-
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
@@ -19,7 +17,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@color/material_blue_grey_900</item>
+        <item name="android:background">@color/color_accent</item>
+        <item name="android:selectableItemBackground">?selectableItemBackground</item>
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginTop">@dimen/button_top_margin</item>
@@ -30,5 +29,18 @@
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
 
+
+    <style name="list_item_text_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="list_item_text_style.dept_no">
+        <item name="android:textSize">@dimen/abc_text_size_title_material</item>
+    </style>
+    <style name="list_item_text_style.dept_text">
+        <item name="android:textSize">@dimen/abc_text_size_subhead_material</item>
+    </style>
 
 </resources>
