@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">BordingVistaTestApp</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="button_text_database">Database</string>
+    <string name="button_text_network">Network</string>
+    <string name="title_activity_database">DatabaseActivity</string>
+    <string name="title_activity_network">NetworkActivity</string>
+    <string name="button_text_get_network_data">Get Network Data</string>
+
+
+    <string name="no_internet_connection_text">Your internet connection is not available. Please connect with internet.</string>
+</resources>
