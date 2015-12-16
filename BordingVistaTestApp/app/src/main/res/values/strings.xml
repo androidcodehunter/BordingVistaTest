@@ -13,6 +13,8 @@
 
     <string name="no_internet_connection_text">Your internet connection is not available. Please connect with internet.</string>
     <string name="hint_promotion_text">Enter Promotion Text</string>
-    <string name="text_button_enter">Enter</string>
+    <string name="text_button_insert">Insert</string>
     <string name="title_activity_product">ProductActivity</string>
+    <string name="text_button_save">Save</string>
+    <string name="title_activity_product_list">ProductListActivity</string>
 </resources>

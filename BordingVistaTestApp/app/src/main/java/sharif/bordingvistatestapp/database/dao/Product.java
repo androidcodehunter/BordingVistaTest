@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import sharif.bordingvistatestapp.database.MyContentProvider;
 import sharif.bordingvistatestapp.database.table.ProductTable;
+import sharif.bordingvistatestapp.database.table.PromotionTable;
 
 /**
  * Created by androidcodehunter on 12/16/2015.
@@ -30,6 +31,10 @@ public class Product {
     private String mProductName;
     private int mPromotionId;
 
+
+    public Product(){
+
+    }
 
     public Product(ContentValues values){
         if (values != null){
@@ -62,5 +67,13 @@ public class Product {
 
     public void setPromotionId(int promotionId) {
         this.mPromotionId = promotionId;
+    }
+
+
+    public ContentValues getContentValues() {
+        ContentValues values = new ContentValues();
+        values.put(ProductTable.PRODUCT_TEXT, getProductName());
+        values.put(ProductTable.PROMOTION_ID, getPromotionId());
+        return values;
     }
 }

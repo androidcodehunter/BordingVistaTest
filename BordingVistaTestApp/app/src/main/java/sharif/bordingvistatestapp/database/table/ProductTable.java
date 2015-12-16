@@ -16,7 +16,8 @@ public class ProductTable {
 
     private static final String CREATE_TABLE = "create table " + TABLE_NAME
             + "(" + PRODUCT_ID + " integer primary key autoincrement, "
-            + PRODUCT_TEXT + " text not null );";
+            + PRODUCT_TEXT + " text, "
+            + PROMOTION_ID + " integer default 0);";
 
     public static void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
@@ -31,7 +32,5 @@ public class ProductTable {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
-
-
 
 }

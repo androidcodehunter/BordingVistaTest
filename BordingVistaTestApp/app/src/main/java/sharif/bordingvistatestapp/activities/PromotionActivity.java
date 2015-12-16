@@ -1,6 +1,7 @@
 package sharif.bordingvistatestapp.activities;
 
 import android.content.ContentUris;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import sharif.bordingvistatestapp.R;
 import sharif.bordingvistatestapp.database.DBUtils;
 import sharif.bordingvistatestapp.database.dao.Promotion;
+import sharif.bordingvistatestapp.database.table.PromotionTable;
 
 
 /**
@@ -46,12 +48,22 @@ public class PromotionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Promotion promotion = new Promotion();
                 promotion.setPromotionText(mPromotionEditText.getText().toString());
-                Uri uri =  DBUtils.insertPromotion(getBaseContext(), promotion);
+                Uri uri = DBUtils.insertPromotion(getBaseContext(), promotion);
                 int id = (int) ContentUris.parseId(uri);
                 promotion.setPromotionId(id);
 
+                startProductActivity(id);
             }
         });
+    }
+
+    /**
+     * Start product activity.
+     * */
+    private void startProductActivity(int id) {
+        Intent intent = new Intent(this, ProductActivity.class);
+        intent.putExtra(PromotionTable.PROMOTION_ID, id);
+        startActivity(intent);
     }
 
     private void initViews() {
