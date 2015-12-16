@@ -1,6 +1,5 @@
 package sharif.bordingvistatestapp.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import sharif.bordingvistatestapp.R;
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final int id = view.getId();
 
         if (id == R.id.database_button) {
-            launchClass(DatabaseActivity.class);
+            launchClass(PromotionActivity.class);
         }
 
         if (id == R.id.button_network) {

@@ -17,10 +17,8 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,7 +27,7 @@ import java.util.List;
 
 import sharif.bordingvistatestapp.R;
 import sharif.bordingvistatestapp.adapters.DepartmentListAdapter;
-import sharif.bordingvistatestapp.database.table.Department;
+import sharif.bordingvistatestapp.database.dao.Department;
 import sharif.bordingvistatestapp.utils.Constants;
 import sharif.bordingvistatestapp.utils.HttpHelper;
 import sharif.bordingvistatestapp.utils.Utils;

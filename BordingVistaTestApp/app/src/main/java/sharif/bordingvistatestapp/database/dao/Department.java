@@ -1,6 +1,4 @@
-package sharif.bordingvistatestapp.database.table;
-
-import android.util.Log;
+package sharif.bordingvistatestapp.database.dao;
 
 import org.json.JSONArray;
 import org.json.JSONException;

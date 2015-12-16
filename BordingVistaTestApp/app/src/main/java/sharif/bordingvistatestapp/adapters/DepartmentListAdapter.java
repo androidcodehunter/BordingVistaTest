@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import sharif.bordingvistatestapp.R;
-import sharif.bordingvistatestapp.database.table.Department;
+import sharif.bordingvistatestapp.database.dao.Department;
 
 /**
  * Created by androidcodehunter on 12/14/2015.
