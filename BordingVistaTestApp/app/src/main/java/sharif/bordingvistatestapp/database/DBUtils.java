@@ -1,5 +1,6 @@
 package sharif.bordingvistatestapp.database;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -68,7 +69,7 @@ public class DBUtils {
 
 
     public static Uri insertProduct(Context context, Product product) {
-        return context.getContentResolver().insert(Promotion.CONTENT_URI, product.getContentValues());
+        return context.getContentResolver().insert(Product.CONTENT_URI, product.getContentValues());
     }
 
 
@@ -133,6 +134,36 @@ public class DBUtils {
 
         return new Product(values);
     }
+
+
+    public static int deleteProduct(Context context, int id) {
+
+        Product product = DBUtils.getProduct(context, id);
+
+        context.getContentResolver().delete(
+                ContentUris.withAppendedId(Promotion.CONTENT_URI, product.getPromotionId()), null, null);
+
+        return context.getContentResolver().delete(
+                ContentUris.withAppendedId(Product.CONTENT_URI, id), null, null);
+    }
+
+    public static int updateProduct(Context context, Product product) {
+        int id = product.getProductId();
+
+        return context.getContentResolver().update(
+                ContentUris.withAppendedId(Product.CONTENT_URI, id), product.getContentValues(), null,
+                null);
+    }
+
+    public static int updatePromotion(Context context, Promotion promotion){
+
+        int id = promotion.getPromotionId();
+
+        return context.getContentResolver().update(
+                ContentUris.withAppendedId(Promotion.CONTENT_URI, id), promotion.getContentValues(), null,
+                null);
+    }
+
 
 
 }

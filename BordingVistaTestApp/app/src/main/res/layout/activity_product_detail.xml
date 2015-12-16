@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="sharif.bordingvistatestapp.activities.ProductDetailActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+
+    <EditText
+        android:id="@+id/product_edit_text"
+        style="@style/home_button_style"
+        android:gravity="center"
+        android:textColorHint="@android:color/white" />
+
+    <EditText
+        android:id="@+id/promotion_edit_text"
+        style="@style/home_button_style"
+        android:gravity="center"
+        android:textColorHint="@android:color/white"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/button_height"
+    android:orientation="horizontal">
+    <Button
+        android:id="@+id/button_update"
+        style="@style/home_button_style"
+        android:layout_weight="1"
+        android:text="@string/text_button_update"/>
+    <Button
+        android:id="@+id/button_delete"
+        style="@style/home_button_style"
+        android:layout_weight="1"
+        android:text="@string/text_button_delete"/>
+
+</LinearLayout>
+</LinearLayout>

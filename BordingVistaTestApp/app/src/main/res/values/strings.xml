@@ -17,4 +17,7 @@
     <string name="title_activity_product">ProductActivity</string>
     <string name="text_button_save">Save</string>
     <string name="title_activity_product_list">ProductListActivity</string>
+    <string name="title_activity_product_detail">ProductDetailActivity</string>
+    <string name="text_button_update">Update</string>
+    <string name="text_button_delete">Delete</string>
 </resources>

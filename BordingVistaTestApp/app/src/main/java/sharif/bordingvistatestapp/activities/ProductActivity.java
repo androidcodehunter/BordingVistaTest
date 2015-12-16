@@ -1,6 +1,7 @@
 package sharif.bordingvistatestapp.activities;
 
 import android.content.ContentUris;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -49,11 +50,13 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Product product = new Product();
+                product.setProductName(mProductEditText.getText().toString());
+                product.setPromotionId(mPromotionId);
                 Uri uri = DBUtils.insertProduct(getBaseContext(), product);
                 int id = (int) ContentUris.parseId(uri);
                 product.setProductId(id);
 
-
+                startActivity(new Intent(ProductActivity.this, ProductListActivity.class));
             }
         });
     }
